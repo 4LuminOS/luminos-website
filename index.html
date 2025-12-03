@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuminOS - Intelligence. Privacy. Freedom.</title>
+    <meta name="description" content="The lightweight, private, and AI-integrated Linux distribution.">
+    <style>
+        :root {
+            --bg-dark: #0f1115;
+            --bg-card: #181a20;
+            --accent-primary: #4CB6B0; /* Turquoise */
+            --accent-secondary: #FF7F50; /* Orange */
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --radius: 24px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* --- LAYOUT --- */
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        /* --- CARDS (Bento Grid) --- */
+        .card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(76, 182, 176, 0.3);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            grid-column: span 12;
+            text-align: center;
+            padding: 80px 20px;
+            background: radial-gradient(circle at top right, rgba(76, 182, 176, 0.15), transparent 40%);
+            border: 1px solid rgba(76, 182, 176, 0.1);
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #fff, #ccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-primary);
+            color: #000;
+        }
+        
+        .btn-primary:hover {
+            background-color: #3aa39e;
+            box-shadow: 0 0 25px rgba(76, 182, 176, 0.5);
+            transform: scale(1.05);
+        }
+
+        .version-tag {
+            background: rgba(255, 127, 80, 0.15);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            display: inline-block;
+            color: var(--accent-secondary);
+            border: 1px solid rgba(255, 127, 80, 0.3);
+        }
+
+        /* --- FEATURES --- */
+        .feature-ai {
+            grid-column: span 8; /* Grande boite */
+            background: linear-gradient(135deg, var(--bg-card) 0%, #1f2229 100%);
+        }
+
+        .feature-privacy {
+            grid-column: span 4; /* small box */
+        }
+
+        .feature-tech {
+            grid-column: span 4; /* medium box */
+        }
+        
+        .feature-apps {
+            grid-column: span 8; /* big box */
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        h2 { font-size: 1.5rem; margin-bottom: 10px; color: #fff; }
+        p { color: var(--text-muted); line-height: 1.6; }
+
+        .icon { font-size: 2.5rem; margin-bottom: 15px; }
+
+        /* --- FOOTER --- */
+        footer {
+            margin-top: 60px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-align: center;
+            opacity: 0.6;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container { grid-template-columns: 1fr; }
+            .hero, .feature-ai, .feature-privacy, .feature-tech, .feature-apps { grid-column: span 1; }
+            h1 { font-size: 2.5rem; }
+            .feature-apps { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="card hero">
+            <span class="version-tag">v0.2.1 Alpha Available</span>
+            <h1>LuminOS</h1>
+            <p class="tagline">Where intelligence meets ethics. <br>A private, AI-integrated OS built for modern machines.</p>
+            
+            <div>
+                <a href="https://github.com/4LuminOS/build-scripts/releases" class="btn btn-primary">Download LuminOS!</a>
+            </div>
+        </div>
+
+        <div class="card feature-ai">
+            <div class="icon">🧠</div>
+            <h2>Powered by Lumin</h2>
+            <p>An integrated AI assistant based on Llama 3. It runs <strong>100% locally</strong> on your device. No cloud, no data leaks, no subscription. It helps you write, navigate, think, and code efficiently, even offline.</p>
+        </div>
+
+        <div class="card feature-privacy">
+            <div class="icon">🛡️</div>
+            <h2>Privacy First</h2>
+            <p>Swiss philosophy. Zero telemetry. By default, your data never leaves your local storage. You are the sole owner.</p>
+        </div>
+
+        <div class="card feature-tech">
+            <div class="icon">⚡</div>
+            <h2>Debian Core</h2>
+            <p>Built on the rock-solid foundation of Debian 13 "Trixie". Stability meets modern software compatibility.</p>
+        </div>
+
+        <div class="card feature-apps">
+            <div>
+                <h2>"Batteries Included"</h2>
+                <p>Productivity out of the box with <strong>OnlyOffice</strong>, <strong>VLC</strong>, <strong>Timeshift</strong>, and full <strong>Flatpak</strong> support.</p>
+            </div>
+            <div style="font-size: 4rem; opacity: 0.1; margin-right: 20px;">📦</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 LuminOS Project. Open Source, under GPL-3.0.</p>
+        <p>Designed by Gabriel</p>
+    </footer>
+
+</body>
+</html>
