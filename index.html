@@ -292,8 +292,8 @@
         }
         
         .btn:hover::before {
-            width: 300px;
-            height: 300px;
+            width: 400%;
+            height: 400%;
         }
 
         .btn-primary {
@@ -471,7 +471,7 @@
         }
         
         /* Extra visual enhancements */
-        strong {
+        .accent-text {
             color: var(--accent-primary);
             font-weight: 700;
         }
@@ -482,6 +482,16 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-weight: 700;
+        }
+        
+        .decorative-icon {
+            font-size: 5rem;
+            opacity: 0.15;
+            margin-right: 20px;
+        }
+        
+        .footer-text {
+            margin-top: 30px;
         }
     </style>
 </head>
@@ -512,27 +522,27 @@
         <div class="card feature-ai" id="features">
             <div class="icon">🧠</div>
             <h2>Powered by Lumin</h2>
-            <p>An integrated AI assistant based on <span class="highlight">Llama 3</span>. It runs <strong>100% locally</strong> on your device. No cloud, no data leaks, no subscription. It helps you write, navigate, think, and code efficiently, even offline.</p>
+            <p>An integrated AI assistant based on <span class="highlight">Llama 3</span>. It runs <span class="accent-text">100% locally</span> on your device. No cloud, no data leaks, no subscription. It helps you write, navigate, think, and code efficiently, even offline.</p>
         </div>
 
         <div class="card feature-privacy">
             <div class="icon">🛡️</div>
             <h2>Privacy First</h2>
-            <p>Swiss philosophy. <strong>Zero telemetry</strong>. By default, your data never leaves your local storage. You are the sole owner.</p>
+            <p>Swiss philosophy. <span class="accent-text">Zero telemetry</span>. By default, your data never leaves your local storage. You are the sole owner.</p>
         </div>
 
         <div class="card feature-tech">
             <div class="icon">⚡</div>
             <h2>Debian Core</h2>
-            <p>Built on the rock-solid foundation of <strong>Debian 13 "Trixie"</strong>. Stability meets modern software compatibility.</p>
+            <p>Built on the rock-solid foundation of <span class="accent-text">Debian 13 "Trixie"</span>. Stability meets modern software compatibility.</p>
         </div>
 
         <div class="card feature-apps">
             <div>
                 <h2>"Batteries Included"</h2>
-                <p>Productivity out of the box with <strong>OnlyOffice</strong>, <strong>VLC</strong>, <strong>Timeshift</strong>, and full <strong>Flatpak</strong> support.</p>
+                <p>Productivity out of the box with <span class="accent-text">OnlyOffice</span>, <span class="accent-text">VLC</span>, <span class="accent-text">Timeshift</span>, and full <span class="accent-text">Flatpak</span> support.</p>
             </div>
-            <div style="font-size: 5rem; opacity: 0.15; margin-right: 20px;">📦</div>
+            <div class="decorative-icon">📦</div>
         </div>
     </div>
 
@@ -548,7 +558,7 @@
                 <span>💬</span> Community
             </a>
         </div>
-        <p style="margin-top: 30px;">&copy; 2025 LuminOS Project. Open Source, under <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GPL-3.0</a>.</p>
+        <p class="footer-text">&copy; 2025 LuminOS Project. Open Source, under <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GPL-3.0</a>.</p>
         <p>Designed by Gabriel</p>
     </footer>
 
