@@ -56,6 +56,7 @@
                 radial-gradient(circle at 40% 80%, rgba(196, 113, 245, 0.08) 0%, transparent 50%);
             pointer-events: none;
             animation: floatBg 20s ease-in-out infinite;
+            will-change: transform; /* Optimisation GPU */
         }
         
         @keyframes floatBg {
@@ -70,6 +71,7 @@
             width: 100%;
             background: rgba(21, 25, 37, 0.8);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px); /* Compatibilité Safari */
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             padding: 15px 0;
             z-index: 100;
@@ -150,6 +152,7 @@
         .card {
             background: rgba(21, 25, 37, 0.6);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-radius: var(--radius);
             padding: 40px;
             display: flex;
@@ -372,15 +375,16 @@
         
         p { 
             color: var(--text-muted); 
-            line-height: 1.8;
+            line-height: 1.8; 
             font-size: 1.05rem;
         }
 
         .icon { 
             font-size: 3.5rem; 
-            margin-bottom: 20px;
+            margin-bottom: 20px; 
             filter: drop-shadow(0 0 20px rgba(0, 217, 255, 0.5));
             animation: float 3s ease-in-out infinite;
+            will-change: transform;
         }
         
         @keyframes float {
@@ -388,24 +392,10 @@
             50% { transform: translateY(-10px); }
         }
         
-        .feature-ai .icon {
-            animation-delay: 0s;
-        }
-        
-        .feature-privacy .icon {
-            animation-delay: 0.5s;
-            filter: drop-shadow(0 0 20px rgba(0, 217, 255, 0.6));
-        }
-        
-        .feature-tech .icon {
-            animation-delay: 1s;
-            filter: drop-shadow(0 0 20px rgba(255, 215, 61, 0.6));
-        }
-        
-        .feature-apps .icon {
-            animation-delay: 1.5s;
-            filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.4));
-        }
+        .feature-ai .icon { animation-delay: 0s; }
+        .feature-privacy .icon { animation-delay: 0.5s; filter: drop-shadow(0 0 20px rgba(0, 217, 255, 0.6)); }
+        .feature-tech .icon { animation-delay: 1s; filter: drop-shadow(0 0 20px rgba(255, 215, 61, 0.6)); }
+        .feature-apps .icon { animation-delay: 1.5s; filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.4)); }
 
         
         /* --- FOOTER --- */
@@ -471,11 +461,7 @@
         }
         
         /* Extra visual enhancements */
-        .accent-text {
-            color: var(--accent-primary);
-            font-weight: 700;
-        }
-        
+        .accent-text { color: var(--accent-primary); font-weight: 700; }
         .highlight {
             background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
             -webkit-background-clip: text;
@@ -483,16 +469,8 @@
             background-clip: text;
             font-weight: 700;
         }
-        
-        .decorative-icon {
-            font-size: 5rem;
-            opacity: 0.15;
-            margin-right: 20px;
-        }
-        
-        .footer-text {
-            margin-top: 30px;
-        }
+        .decorative-icon { font-size: 5rem; opacity: 0.15; margin-right: 20px; }
+        .footer-text { margin-top: 30px; }
     </style>
 </head>
 <body>
@@ -503,19 +481,19 @@
             <div class="nav-links">
                 <a href="#features">Features</a>
                 <a href="#download">Download</a>
-                <a href="https://github.com/4LuminOS" target="_blank">GitHub</a>
+                <a href="https://github.com/4LuminOS" target="_blank" rel="noopener noreferrer">GitHub</a>
             </div>
         </div>
     </nav>
 
     <div class="container">
         <div class="card hero" id="download">
-            <span class="version-tag">✨ v0.2.1 Alpha Available</span>
+            <span class="version-tag">🐧 Alpha Version Available!</span>
             <h1>LuminOS</h1>
             <p class="tagline">Where intelligence meets ethics. <br>A private, AI-integrated OS built for modern machines.</p>
             
             <div>
-                <a href="https://github.com/4LuminOS/build-scripts/releases" class="btn btn-primary">Download LuminOS!</a>
+                <a href="https://github.com/4LuminOS/build-scripts/releases" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Download LuminOS!</a>
             </div>
         </div>
 
@@ -537,38 +515,35 @@
             <p>Built on the rock-solid foundation of <span class="accent-text">Debian 13 "Trixie"</span>. Stability meets modern software compatibility.</p>
         </div>
 
-        <div class="card feature-apps">
-            <div>
-                <h2>"Batteries Included"</h2>
-                <p>Productivity out of the box with <span class="accent-text">OnlyOffice</span>, <span class="accent-text">VLC</span>, <span class="accent-text">Timeshift</span>, and full <span class="accent-text">Flatpak</span> support.</p>
-            </div>
-            <div class="decorative-icon">📦</div>
+      <div class="card feature-apps">
+            <div class="icon">📦</div>
+            <h2>"Batteries Included"</h2>
+            <p>Productivity out of the box with <span class="accent-text">OnlyOffice</span>, <span class="accent-text">VLC</span>, <span class="accent-text">Timeshift</span>, and full <span class="accent-text">Flatpak</span> support.</p>
         </div>
-    </div>
 
     <footer>
         <div class="footer-links">
-            <a href="https://github.com/4LuminOS" class="social-link" target="Our GitHub">
+            <a href="https://github.com/4LuminOS" class="social-link" target="_blank" rel="noopener noreferrer">
                 <span>🐙</span> GitHub
             </a>
-            <a href="https://github.com/4LuminOS/build-scripts/releases" class="social-link" target="Releases">
+            <a href="https://github.com/4LuminOS/build-scripts/releases" class="social-link" target="_blank" rel="noopener noreferrer">
                 <span>📥</span> Download
             </a>
 
-             <a href="https://x.com/4LuminOS" class="social-link" target="Our X page">
+             <a href="https://x.com/4LuminOS" class="social-link" target="_blank" rel="noopener noreferrer">
                 <span>🐦</span> X 
             </a>
 
-             <a href="https://www.instagram.com/4luminos/" class="social-link" target="Our Instagram page">
+             <a href="https://www.instagram.com/4luminos/" class="social-link" target="_blank" rel="noopener noreferrer">
                 <span>📸</span> Instagram
             </a>
 
-             <a href="https://mastodon.social/@LuminOS" class="social-link" target="Our mastodon page">
+             <a href="https://mastodon.social/@LuminOS" class="social-link" target="_blank" rel="noopener noreferrer">
                 <span>🦣</span> Community
             </a>
             
         </div>
-        <p class="footer-text">&copy; 2025 LuminOS Project. Open Source, under <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GPL-3.0</a>.</p>
+        <p class="footer-text">&copy; 2025 LuminOS Project. Open Source, under <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank" rel="noopener noreferrer">GPL-3.0</a>.</p>
         <p>Designed by Gabriel</p>
     </footer>
 
