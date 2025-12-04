@@ -8,11 +8,10 @@
     <style>
         :root {
             --bg-dark: #0a0e1a;
-            --bg-card: #151925;
+            --bg-card: rgba(21, 25, 37, 0.6); /* Standard card background */
             --accent-primary: #00d9ff; /* Cyan */
             --accent-secondary: #ff6b9d; /* Pink */
             --accent-tertiary: #c471f5; /* Purple */
-            --accent-quaternary: #ffd93d; /* Yellow */
             --text-main: #ffffff;
             --text-muted: #94a3b8;
             --radius: 24px;
@@ -56,7 +55,7 @@
                 radial-gradient(circle at 40% 80%, rgba(196, 113, 245, 0.08) 0%, transparent 50%);
             pointer-events: none;
             animation: floatBg 20s ease-in-out infinite;
-            will-change: transform; /* Optimisation GPU */
+            will-change: transform;
         }
         
         @keyframes floatBg {
@@ -71,7 +70,7 @@
             width: 100%;
             background: rgba(21, 25, 37, 0.8);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px); /* Compatibilité Safari */
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             padding: 15px 0;
             z-index: 100;
@@ -119,23 +118,15 @@
             color: var(--accent-primary);
         }
         
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-tertiary));
-            transition: width 0.3s ease;
-        }
-        
-        .nav-links a:hover::after {
+        /* --- MAIN CONTAINER --- */
+        .main-content {
             width: 100%;
+            display: flex;
+            justify-content: center;
+            /* Ensures footer pushes down */
+            flex: 1; 
         }
 
-        
-        /* --- LAYOUT --- */
         .container {
             max-width: 1200px;
             width: 100%;
@@ -150,7 +141,7 @@
 
         /* --- CARDS (Bento Grid) --- */
         .card {
-            background: rgba(21, 25, 37, 0.6);
+            background: var(--bg-card); /* Standardized Background */
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: var(--radius);
@@ -192,16 +183,9 @@
         }
         
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
         
         /* --- HERO SECTION --- */
         .hero {
@@ -217,25 +201,16 @@
             animation-delay: 0.1s;
         }
         
+        /* ... (Hero internals kept same) ... */
         .hero::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(0, 217, 255, 0.05) 50%, 
-                transparent);
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.05) 50%, transparent);
             animation: shimmer 3s infinite;
             pointer-events: none;
         }
-        
-        @keyframes shimmer {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 1; }
-        }
+        @keyframes shimmer { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
 
         h1 {
             font-size: 5rem;
@@ -251,92 +226,39 @@
             position: relative;
             z-index: 1;
         }
-        
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
+        @keyframes gradientShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
         
         .tagline {
-            font-size: 1.4rem;
-            color: var(--text-muted);
-            margin-bottom: 50px;
-            font-weight: 300;
-            line-height: 1.6;
-            position: relative;
-            z-index: 1;
+            font-size: 1.4rem; color: var(--text-muted); margin-bottom: 50px; font-weight: 300; line-height: 1.6; position: relative; z-index: 1;
         }
 
         /* --- BUTTONS --- */
         .btn {
-            display: inline-block;
-            padding: 18px 50px;
-            border-radius: 50px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 1.1rem;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
+            display: inline-block; padding: 18px 50px; border-radius: 50px; font-weight: 700; text-decoration: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); font-size: 1.1rem; position: relative; overflow: hidden; z-index: 1;
         }
-        
         .btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
+            content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.3); transform: translate(-50%, -50%); transition: width 0.6s, height 0.6s;
         }
-        
-        .btn:hover::before {
-            width: 400%;
-            height: 400%;
-        }
+        .btn:hover::before { width: 400%; height: 400%; }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
-            color: #fff;
-            box-shadow: 0 10px 40px rgba(0, 217, 255, 0.3);
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary)); color: #fff; box-shadow: 0 10px 40px rgba(0, 217, 255, 0.3);
         }
-        
         .btn-primary:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 
-                0 20px 60px rgba(0, 217, 255, 0.4),
-                0 0 80px rgba(196, 113, 245, 0.3);
+            transform: translateY(-3px) scale(1.05); box-shadow: 0 20px 60px rgba(0, 217, 255, 0.4), 0 0 80px rgba(196, 113, 245, 0.3);
         }
 
         .version-tag {
-            background: linear-gradient(135deg, rgba(255, 107, 157, 0.2), rgba(255, 215, 61, 0.2));
-            padding: 8px 20px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            margin-bottom: 30px;
-            display: inline-block;
-            color: var(--accent-secondary);
-            border: 1px solid rgba(255, 107, 157, 0.4);
-            animation: pulse 2s ease-in-out infinite;
-            position: relative;
-            z-index: 1;
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.2), rgba(255, 215, 61, 0.2)); padding: 8px 20px; border-radius: 30px; font-size: 0.9rem; font-weight: 700; margin-bottom: 30px; display: inline-block; color: var(--accent-secondary); border: 1px solid rgba(255, 107, 157, 0.4); animation: pulse 2s ease-in-out infinite; position: relative; z-index: 1;
         }
-        
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 20px rgba(255, 107, 157, 0.3); }
-            50% { box-shadow: 0 0 40px rgba(255, 107, 157, 0.6); }
-        }
+        @keyframes pulse { 0%, 100% { box-shadow: 0 0 20px rgba(255, 107, 157, 0.3); } 50% { box-shadow: 0 0 40px rgba(255, 107, 157, 0.6); } }
 
         
         /* --- FEATURES --- */
         .feature-ai {
             grid-column: span 8;
-            background: linear-gradient(135deg, rgba(21, 25, 37, 0.8) 0%, rgba(31, 34, 41, 0.6) 100%);
+            /* FIXED: Standard background matching other cards */
+            background: var(--bg-card);
             animation-delay: 0.2s;
         }
 
@@ -354,43 +276,16 @@
         
         .feature-apps {
             grid-column: span 8;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
+            display: flex; flex-direction: row; align-items: center; justify-content: space-between;
             background: linear-gradient(135deg, rgba(255, 107, 157, 0.05), transparent);
             animation-delay: 0.5s;
         }
 
-        h2 { 
-            font-size: 1.8rem; 
-            margin-bottom: 15px; 
-            color: #fff;
-            font-weight: 700;
-            background: linear-gradient(135deg, #fff, var(--text-muted));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        p { 
-            color: var(--text-muted); 
-            line-height: 1.8; 
-            font-size: 1.05rem;
-        }
+        h2 { font-size: 1.8rem; margin-bottom: 15px; color: #fff; font-weight: 700; background: linear-gradient(135deg, #fff, var(--text-muted)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        p { color: var(--text-muted); line-height: 1.8; font-size: 1.05rem; }
 
-        .icon { 
-            font-size: 3.5rem; 
-            margin-bottom: 20px; 
-            filter: drop-shadow(0 0 20px rgba(0, 217, 255, 0.5));
-            animation: float 3s ease-in-out infinite;
-            will-change: transform;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
+        .icon { font-size: 3.5rem; margin-bottom: 20px; filter: drop-shadow(0 0 20px rgba(0, 217, 255, 0.5)); animation: float 3s ease-in-out infinite; will-change: transform; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
         
         .feature-ai .icon { animation-delay: 0s; }
         .feature-privacy .icon { animation-delay: 0.5s; filter: drop-shadow(0 0 20px rgba(0, 217, 255, 0.6)); }
@@ -400,28 +295,20 @@
         
         /* --- FOOTER --- */
         footer {
+            width: 100%;
             margin-top: 80px;
-            margin-bottom: 40px;
+            padding-bottom: 40px;
             color: var(--text-muted);
             font-size: 0.95rem;
             text-align: center;
             opacity: 0.7;
             transition: opacity 0.3s ease;
+            z-index: 10;
         }
         
-        footer:hover {
-            opacity: 1;
-        }
-        
-        footer a {
-            color: var(--accent-primary);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        footer a:hover {
-            color: var(--accent-secondary);
-        }
+        footer:hover { opacity: 1; }
+        footer a { color: var(--accent-primary); text-decoration: none; transition: color 0.3s ease; }
+        footer a:hover { color: var(--accent-secondary); }
         
         .footer-links {
             margin-top: 20px;
@@ -432,21 +319,9 @@
         }
         
         .social-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 50px;
-            transition: all 0.3s ease;
+            display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 50px; transition: all 0.3s ease;
         }
-        
-        .social-link:hover {
-            background: rgba(0, 217, 255, 0.1);
-            border-color: var(--accent-primary);
-            transform: translateY(-2px);
-        }
+        .social-link:hover { background: rgba(0, 217, 255, 0.1); border-color: var(--accent-primary); transform: translateY(-2px); }
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
@@ -460,15 +335,8 @@
             .footer-links { gap: 15px; }
         }
         
-        /* Extra visual enhancements */
         .accent-text { color: var(--accent-primary); font-weight: 700; }
-        .highlight {
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 700;
-        }
+        .highlight { background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700; }
         .decorative-icon { font-size: 5rem; opacity: 0.15; margin-right: 20px; }
         .footer-text { margin-top: 30px; }
     </style>
@@ -486,40 +354,45 @@
         </div>
     </nav>
 
-    <div class="container">
-        <div class="card hero" id="download">
-            <span class="version-tag">🐧 Alpha Version Available!</span>
-            <h1>LuminOS</h1>
-            <p class="tagline">Where intelligence meets ethics. <br>A private, AI-integrated OS built for modern machines.</p>
-            
-            <div>
-                <a href="https://github.com/4LuminOS/build-scripts/releases" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Download LuminOS!</a>
+    <div class="main-content">
+        <div class="container">
+            <div class="card hero" id="download">
+                <span class="version-tag">⭐ LuminOS Alpha Version Available ⭐</span>
+                <h1>LuminOS</h1>
+                <p class="tagline">Where intelligence meets ethics. <br>A private, AI-integrated OS built for modern machines.</p>
+                
+                <div>
+                    <a href="https://github.com/4LuminOS/build-scripts/releases" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Download LuminOS!</a>
+                </div>
+            </div>
+
+            <div class="card feature-ai" id="features">
+                <div class="icon">🧠</div>
+                <h2>Powered by Lumin</h2>
+                <p>An integrated AI assistant based on <span class="highlight">Llama 3</span>. It runs <span class="accent-text">100% locally</span> on your device. No cloud, no data leaks, no subscription. It helps you write, navigate, think, and code efficiently, even offline.</p>
+            </div>
+
+            <div class="card feature-privacy">
+                <div class="icon">🛡️</div>
+                <h2>Privacy First</h2>
+                <p>Swiss philosophy. <span class="accent-text">Zero telemetry</span>. By default, your data never leaves your local storage. You are the sole owner.</p>
+            </div>
+
+            <div class="card feature-tech">
+                <div class="icon">⚡</div>
+                <h2>Debian Core</h2>
+                <p>Built on the rock-solid foundation of <span class="accent-text">Debian 13 "Trixie"</span>. Stability meets modern software compatibility.</p>
+            </div>
+
+            <div class="card feature-apps">
+                <div>
+                    <h2>"Batteries Included"</h2>
+                    <p>Productivity out of the box with <span class="accent-text">OnlyOffice</span>, <span class="accent-text">VLC</span>, <span class="accent-text">Timeshift</span>, and full <span class="accent-text">Flatpak</span> support.</p>
+                </div>
+                <div class="decorative-icon">📦</div>
             </div>
         </div>
-
-        <div class="card feature-ai" id="features">
-            <div class="icon">🧠</div>
-            <h2>Powered by Lumin</h2>
-            <p>An integrated AI assistant based on <span class="highlight">Llama 3</span>. It runs <span class="accent-text">100% locally</span> on your device. No cloud, no data leaks, no subscription. It helps you write, navigate, think, and code efficiently, even offline.</p>
-        </div>
-
-        <div class="card feature-privacy">
-            <div class="icon">🛡️</div>
-            <h2>Privacy First</h2>
-            <p>Swiss philosophy. <span class="accent-text">Zero telemetry</span>. By default, your data never leaves your local storage. You are the sole owner.</p>
-        </div>
-
-        <div class="card feature-tech">
-            <div class="icon">⚡</div>
-            <h2>Debian Core</h2>
-            <p>Built on the rock-solid foundation of <span class="accent-text">Debian 13 "Trixie"</span>. Stability meets modern software compatibility.</p>
-        </div>
-
-      <div class="card feature-apps">
-            <div class="icon">📦</div>
-            <h2>"Batteries Included"</h2>
-            <p>Productivity out of the box with <span class="accent-text">OnlyOffice</span>, <span class="accent-text">VLC</span>, <span class="accent-text">Timeshift</span>, and full <span class="accent-text">Flatpak</span> support.</p>
-        </div>
+    </div>
 
     <footer>
         <div class="footer-links">
@@ -539,7 +412,7 @@
             </a>
 
              <a href="https://mastodon.social/@LuminOS" class="social-link" target="_blank" rel="noopener noreferrer">
-                <span>🦣</span> Community
+                <span>🦣</span> Mastodon
             </a>
             
         </div>
