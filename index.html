@@ -281,8 +281,19 @@
             animation-delay: 0.5s;
         }
 
+        .feature-info {
+            grid-column: span 12;
+            background: linear-gradient(135deg, rgba(196, 113, 245, 0.05), transparent);
+            animation-delay: 0.6s;
+        }
+
         h2 { font-size: 1.8rem; margin-bottom: 15px; color: #fff; font-weight: 700; background: linear-gradient(135deg, #fff, var(--text-muted)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        h3 { font-size: 1.3rem; margin-top: 25px; margin-bottom: 15px; color: var(--accent-primary); font-weight: 600; }
         p { color: var(--text-muted); line-height: 1.8; font-size: 1.05rem; }
+        
+        .feature-info ul { list-style: none; padding: 0; margin-top: 15px; }
+        .feature-info ul li { color: var(--text-muted); line-height: 1.8; font-size: 1.05rem; padding: 8px 0; padding-left: 25px; position: relative; }
+        .feature-info ul li::before { content: '▸'; position: absolute; left: 0; color: var(--accent-primary); font-weight: bold; }
 
         .icon { font-size: 3.5rem; margin-bottom: 20px; filter: drop-shadow(0 0 20px rgba(0, 217, 255, 0.5)); animation: float 3s ease-in-out infinite; will-change: transform; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
@@ -395,7 +406,7 @@
             <div class="card feature-info">
                 <div class="icon">⚙️</div>
                 <h2>Tech & Requirements</h2>
-                <p>We will give more technical infomration on <span class="accent-text">LuminOS</span>very soon! Thank you.</p>
+                <p>We will give more technical information on <span class="accent-text">LuminOS</span> very soon! Thank you.</p>
     
                 <h3>Minimum Requirements (To run LuminOS + Lumin)</h3>
         <ul>
