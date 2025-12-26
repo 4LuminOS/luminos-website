@@ -14,7 +14,7 @@
             --accent-tertiary: #c471f5; /* Purple */
             --text-main: #ffffff;
             --text-muted: #94a3b8;
-            --radius: 24px;
+            --radius: 22px;
         }
 
         * { 
@@ -257,8 +257,7 @@
         /* --- FEATURES --- */
         .feature-ai {
             grid-column: span 8;
-            /* FIXED: Standard background matching other cards */
-            background: var(--bg-card);
+            background: linear-gradient(135deg, rgba(21, 25, 37, 0.6), transparent);
             animation-delay: 0.2s;
         }
 
@@ -326,6 +325,7 @@
             display: flex;
             gap: 30px;
             justify-content: center;
+            align-items: center;
             flex-wrap: wrap;
         }
         
@@ -427,6 +427,7 @@
 
     <footer>
         <div class="footer-links">
+            
             <a href="https://github.com/4LuminOS" class="social-link" target="_blank" rel="noopener noreferrer">
                 <span>🐙</span> GitHub
             </a>
