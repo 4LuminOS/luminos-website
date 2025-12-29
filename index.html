@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#0a0e1a">
     <title>LuminOS - Intelligence. Privacy. Freedom.</title>
     <meta name="description" content="Your lightweight, private, and AI-integrated Linux distribution.">
     <style>
@@ -141,7 +143,7 @@
 
         /* --- CARDS (Bento Grid) --- */
         .card {
-            background: var(--bg-card); /* Standardized Background */
+            background: var(--bg-card);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: var(--radius);
@@ -154,6 +156,7 @@
             position: relative;
             overflow: hidden;
             animation: fadeInUp 0.6s ease-out backwards;
+            cursor: pointer;
         }
         
         .card::before {
@@ -182,6 +185,35 @@
             opacity: 1;
         }
         
+        /* Expandable card content */
+        .card-expandable {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, opacity 0.3s ease-out, margin-top 0.3s ease-out;
+            opacity: 0;
+            margin-top: 0;
+        }
+        
+        .card.expanded .card-expandable {
+            max-height: 800px;
+            opacity: 1;
+            margin-top: 20px;
+        }
+        
+        .expand-indicator {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: var(--accent-primary);
+            transition: transform 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .card.expanded .expand-indicator {
+            transform: rotate(180deg);
+        }
+        
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -192,10 +224,7 @@
             grid-column: span 12;
             text-align: center;
             padding: 100px 40px;
-            background: 
-                radial-gradient(ellipse at top, rgba(0, 217, 255, 0.15), transparent 60%),
-                radial-gradient(ellipse at bottom right, rgba(255, 107, 157, 0.12), transparent 50%),
-                radial-gradient(ellipse at bottom left, rgba(196, 113, 245, 0.1), transparent 50%);
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.05), transparent);
             border: 1px solid rgba(0, 217, 255, 0.2);
             position: relative;
             animation-delay: 0.1s;
@@ -302,23 +331,35 @@
         .feature-tech .icon { animation-delay: 1s; filter: drop-shadow(0 0 20px rgba(255, 215, 61, 0.6)); }
         .feature-apps .icon { animation-delay: 1.5s; filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.4)); }
         .feature-info .icon { animation-delay: 2s; filter: drop-shadow(0 0 20px rgba(255, 100, 150, 0.4)); }
+        .text-card .icon { animation-delay: 0.7s; filter: drop-shadow(0 0 18px rgba(0, 217, 255, 0.45)); }
         
         /* --- FOOTER --- */
         footer {
             width: 100%;
             margin-top: 80px;
-            padding-bottom: 40px;
+            padding: 40px 20px;
             color: var(--text-muted);
             font-size: 0.95rem;
             text-align: center;
             opacity: 0.7;
             transition: opacity 0.3s ease;
             z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
         footer:hover { opacity: 1; }
         footer a { color: var(--accent-primary); text-decoration: none; transition: color 0.3s ease; }
         footer a:hover { color: var(--accent-secondary); }
+        
+        .footer-container {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
         
         .footer-links {
             margin-top: 20px;
@@ -327,6 +368,7 @@
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
+            width: 100%;
         }
         
         .social-link {
@@ -334,16 +376,79 @@
         }
         .social-link:hover { background: rgba(0, 217, 255, 0.1); border-color: var(--accent-primary); transform: translateY(-2px); }
 
+        /* New Text Card */
+        .text-card {
+            grid-column: span 12;
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.05), transparent);
+            animation-delay: 0.7s;
+            min-height: 200px;
+        }
+        
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .comparison-side {
+            padding: 20px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        
+        .comparison-side h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+        
+        .comparison-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .comparison-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.6;
+            color: var(--text-muted);
+        }
+        
+        .comparison-list li.pro::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #00d9ff;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .comparison-list li.con::before {
+            content: '✗';
+            position: absolute;
+            left: 0;
+            color: #ff6b9d;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .container { grid-template-columns: 1fr; }
-            .hero, .feature-ai, .feature-privacy, .feature-tech, .feature-apps, .feature-info { grid-column: span 1; }
+            .hero, .feature-ai, .feature-privacy, .feature-tech, .feature-apps, .feature-info, .text-card { grid-column: span 1; }
             h1 { font-size: 3rem; }
             .hero { padding: 60px 30px; }
             .feature-apps { flex-direction: column; align-items: flex-start; }
             .nav-links { gap: 15px; }
             .nav-logo { font-size: 1.2rem; }
             .footer-links { gap: 15px; }
+            .social-link { font-size: 0.85rem; padding: 8px 12px; }
+            footer { padding: 30px 15px; }
+            .comparison-container { grid-template-columns: 1fr; gap: 20px; }
         }
         
         .accent-text { color: var(--accent-primary); font-weight: 700; }
@@ -377,33 +482,57 @@
                 </div>
             </div>
 
-            <div class="card feature-ai" id="features"> 
+            <div class="card feature-ai" id="features" onclick="toggleCard(this)"> 
                 <div class="icon">🧠</div>
                 <h2>Powered by Lumin</h2>
                 <p>An integrated AI assistant based on <span class="highlight">Llama 3</span>. It runs <span class="accent-text">100% locally</span> on your device. No cloud, no data leaks, no subscription. It helps you write, navigate, think, and WORK efficiently.</p>
+                <div class="card-expandable">
+                    <h3>Additional Details</h3>
+                    <p>Lumin uses advanced natural language processing to understand your queries and provide intelligent responses. It can help with coding, writing, research, and much more—all while keeping your data private and secure on your local machine.</p>
+                    <p>The AI model is optimized for performance and runs efficiently on modern hardware, providing quick responses without requiring cloud connectivity.</p>
+                </div>
+                <span class="expand-indicator">▼</span>
             </div>
 
-            <div class="card feature-privacy">
+            <div class="card feature-privacy" onclick="toggleCard(this)">
                 <div class="icon">🛡️</div>
                 <h2>Privacy First</h2>
-                <p>Swiss philosophy; <span class="accent-text">Zero telemetry</span>. Becasue your computer is your computer: By default, your data never leaves your local storage, and no will scrutinize it. You are the sole owner.</p>
+                <p>Swiss philosophy; <span class="accent-text">Zero telemetry</span>. Because your computer is your computer: By default, your data never leaves your local storage, and no will scrutinize it. You are the sole owner.</p>
+                <div class="card-expandable">
+                    <h3>Additional Details</h3>
+                    <p>We believe in transparency and user control. LuminOS includes no tracking, no analytics, and no hidden data collection. Your files, your conversations with Lumin, and your usage patterns stay completely private.</p>
+                    <p>Built with privacy-focused tools and open-source components that you can audit yourself.</p>
+                </div>
+                <span class="expand-indicator">▼</span>
             </div>
 
-            <div class="card feature-tech">
+            <div class="card feature-tech" onclick="toggleCard(this)">
                 <div class="icon">⚡</div>
                 <h2>Debian Core</h2>
                 <p>Built on the rock-solid foundation of <span class="accent-text">Debian 13 "Trixie"</span>. Stability meets modern software compatibility.</p>
+                <div class="card-expandable">
+                    <h3>Additional Details</h3>
+                    <p>Debian provides a stable, secure, and well-tested foundation. With thousands of packages available and excellent hardware support, you get the reliability of enterprise Linux with the flexibility of a modern desktop system.</p>
+                    <p>Regular security updates and long-term support ensure your system stays secure and functional.</p>
+                </div>
+                <span class="expand-indicator">▼</span>
             </div>
 
-            <div class="card feature-apps">
+            <div class="card feature-apps" onclick="toggleCard(this)">
                 <div>
                     <h2>"Batteries Included"</h2>
                     <p>Productivity out of the box with <span class="accent-text">OnlyOffice</span>, <span class="accent-text">VLC</span>, <span class="accent-text">Timeshift</span>, and full <span class="accent-text">Flatpak</span> support.</p>
+                    <div class="card-expandable">
+                        <h3>Additional Details</h3>
+                        <p>Pre-installed applications include a full office suite, media player, system backup tool, and access to thousands of Flatpak applications. Everything you need to be productive from day one.</p>
+                        <p>Easy software management with graphical tools and command-line options for power users.</p>
+                    </div>
                 </div>
                 <div class="icon">📦</div>
+                <span class="expand-indicator">▼</span>
             </div>
 
-            <div class="card feature-info">
+            <div class="card feature-info" onclick="toggleCard(this)">
                 <div class="icon">⚙️</div>
                 <h2>Tech & Requirements</h2>
                 <p>We will give more technical information on <span class="accent-text">LuminOS</span> very soon! Thank you.</p>
@@ -423,10 +552,60 @@
                 <span class="accent-text">GPU/Graphics:</span> NVIDIA/AMD Dedicated GPU (Accelerates Lumin's response time); integrated graphics will also work.
             </li>
         </ul>
+        <div class="card-expandable">
+            <h3>Recommended Specifications</h3>
+            <ul>
+                <li><span class="accent-text">Processor:</span> 8+ Cores for optimal AI performance</li>
+                <li><span class="accent-text">RAM:</span> 16 GB+ for smoother multitasking</li>
+                <li><span class="accent-text">Storage:</span> 128GB+ NVMe SSD for best experience</li>
+                <li><span class="accent-text">GPU:</span> Dedicated GPU with 4GB+ VRAM for fastest AI responses</li>
+            </ul>
+        </div>
+        <span class="expand-indicator">▼</span>
+    </div>
+
+            <div class="card text-card" onclick="toggleCard(this)">
+                <div class="icon">⚖️</div>
+                <h2>Compare & Choose</h2>
+                <p>Side-by-side comparison to help you make the right decision.</p>
+                
+                <div class="comparison-container" role="region" aria-label="Comparison between Option A and Option B">
+                    <div class="comparison-side">
+                        <h3>Option A</h3>
+                        <ul class="comparison-list">
+                            <li class="pro">First advantage point</li>
+                            <li class="pro">Second advantage point</li>
+                            <li class="pro">Third advantage point</li>
+                            <li class="con">First drawback point</li>
+                            <li class="con">Second drawback point</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="comparison-side">
+                        <h3>Option B</h3>
+                        <ul class="comparison-list">
+                            <li class="pro">First advantage point</li>
+                            <li class="pro">Second advantage point</li>
+                            <li class="pro">Third advantage point</li>
+                            <li class="con">First drawback point</li>
+                            <li class="con">Second drawback point</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-expandable">
+                    <h3>More Comparison Details</h3>
+                    <p>You can customize this comparison card to show any two options side by side. Perfect for comparing LuminOS features, comparing with other operating systems, or showcasing different configuration options.</p>
+                    <p>Simply edit the HTML to add your specific comparison points, and the styling will handle the rest.</p>
+                </div>
+                <span class="expand-indicator">▼</span>
+            </div>
+
+        </div>
     </div>
 
     <footer>
-        <div class="footer-links">
+        <div class="footer-container">
+            <div class="footer-links">
             
             <a href="https://github.com/4LuminOS" class="social-link" target="_blank" rel="noopener noreferrer">
                 <span>🐙</span> GitHub
@@ -450,7 +629,32 @@
         </div>
         <p class="footer-text">&copy; 2025, The LuminOS Project. It's Open Source, under <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank" rel="noopener noreferrer">GPL-3.0</a>.</p>
         <p>Designed by Gabriel</p>
+        </div>
     </footer>
+
+    <script>
+        function toggleCard(card) {
+            card.classList.toggle('expanded');
+            const isExpanded = card.classList.contains('expanded');
+            card.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+        }
+        
+        // Add keyboard support
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card[onclick]');
+            cards.forEach(card => {
+                card.setAttribute('tabindex', '0');
+                card.setAttribute('role', 'button');
+                card.setAttribute('aria-expanded', 'false');
+                card.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleCard(this);
+                    }
+                });
+            });
+        });
+    </script>
 
 </body>
 </html>
