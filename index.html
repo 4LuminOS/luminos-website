@@ -307,18 +307,29 @@
         footer {
             width: 100%;
             margin-top: 80px;
-            padding-bottom: 40px;
+            padding: 40px 20px;
             color: var(--text-muted);
             font-size: 0.95rem;
             text-align: center;
             opacity: 0.7;
             transition: opacity 0.3s ease;
             z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
         footer:hover { opacity: 1; }
         footer a { color: var(--accent-primary); text-decoration: none; transition: color 0.3s ease; }
         footer a:hover { color: var(--accent-secondary); }
+        
+        .footer-container {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
         
         .footer-links {
             margin-top: 20px;
@@ -327,6 +338,7 @@
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
+            width: 100%;
         }
         
         .social-link {
@@ -334,16 +346,26 @@
         }
         .social-link:hover { background: rgba(0, 217, 255, 0.1); border-color: var(--accent-primary); transform: translateY(-2px); }
 
+        /* New Text Card */
+        .text-card {
+            grid-column: span 12;
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.05), transparent);
+            animation-delay: 0.7s;
+            min-height: 200px;
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .container { grid-template-columns: 1fr; }
-            .hero, .feature-ai, .feature-privacy, .feature-tech, .feature-apps, .feature-info { grid-column: span 1; }
+            .hero, .feature-ai, .feature-privacy, .feature-tech, .feature-apps, .feature-info, .text-card { grid-column: span 1; }
             h1 { font-size: 3rem; }
             .hero { padding: 60px 30px; }
             .feature-apps { flex-direction: column; align-items: flex-start; }
             .nav-links { gap: 15px; }
             .nav-logo { font-size: 1.2rem; }
-            .footer-links { gap: 15px; }
+            .footer-links { gap: 15px; flex-direction: column; }
+            .social-link { width: 100%; max-width: 300px; justify-content: center; }
+            footer { padding: 30px 15px; }
         }
         
         .accent-text { color: var(--accent-primary); font-weight: 700; }
@@ -425,8 +447,19 @@
         </ul>
     </div>
 
+            <div class="card text-card">
+                <div class="icon">📝</div>
+                <h2>Add Your Text Here</h2>
+                <p>This is a placeholder card where you can add your custom text content. Edit this section to include any additional information, announcements, or content you'd like to display on your website.</p>
+                <p>You can modify this text directly in the HTML file. Simply locate this card section and replace the content with your desired message.</p>
+            </div>
+
+        </div>
+    </div>
+
     <footer>
-        <div class="footer-links">
+        <div class="footer-container">
+            <div class="footer-links">
             
             <a href="https://github.com/4LuminOS" class="social-link" target="_blank" rel="noopener noreferrer">
                 <span>🐙</span> GitHub
@@ -450,6 +483,7 @@
         </div>
         <p class="footer-text">&copy; 2025, The LuminOS Project. It's Open Source, under <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank" rel="noopener noreferrer">GPL-3.0</a>.</p>
         <p>Designed by Gabriel</p>
+        </div>
     </footer>
 
 </body>
