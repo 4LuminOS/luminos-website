@@ -143,7 +143,7 @@
 
         /* --- CARDS (Bento Grid) --- */
         .card {
-            background: var(--bg-card); /* Standardized Background */
+            background: var(--bg-card);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: var(--radius);
@@ -156,6 +156,7 @@
             position: relative;
             overflow: hidden;
             animation: fadeInUp 0.6s ease-out backwards;
+            cursor: pointer;
         }
         
         .card::before {
@@ -184,6 +185,35 @@
             opacity: 1;
         }
         
+        /* Expandable card content */
+        .card-expandable {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, opacity 0.3s ease-out, margin-top 0.3s ease-out;
+            opacity: 0;
+            margin-top: 0;
+        }
+        
+        .card.expanded .card-expandable {
+            max-height: 1000px;
+            opacity: 1;
+            margin-top: 20px;
+        }
+        
+        .expand-indicator {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: var(--accent-primary);
+            transition: transform 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .card.expanded .expand-indicator {
+            transform: rotate(180deg);
+        }
+        
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -194,10 +224,7 @@
             grid-column: span 12;
             text-align: center;
             padding: 100px 40px;
-            background: 
-                radial-gradient(ellipse at top, rgba(0, 217, 255, 0.15), transparent 60%),
-                radial-gradient(ellipse at bottom right, rgba(255, 107, 157, 0.12), transparent 50%),
-                radial-gradient(ellipse at bottom left, rgba(196, 113, 245, 0.1), transparent 50%);
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.05), transparent);
             border: 1px solid rgba(0, 217, 255, 0.2);
             position: relative;
             animation-delay: 0.1s;
@@ -455,33 +482,57 @@
                 </div>
             </div>
 
-            <div class="card feature-ai" id="features"> 
+            <div class="card feature-ai" id="features" onclick="toggleCard(this)"> 
                 <div class="icon">🧠</div>
                 <h2>Powered by Lumin</h2>
                 <p>An integrated AI assistant based on <span class="highlight">Llama 3</span>. It runs <span class="accent-text">100% locally</span> on your device. No cloud, no data leaks, no subscription. It helps you write, navigate, think, and WORK efficiently.</p>
+                <div class="card-expandable">
+                    <h3>Additional Details</h3>
+                    <p>Lumin uses advanced natural language processing to understand your queries and provide intelligent responses. It can help with coding, writing, research, and much more—all while keeping your data private and secure on your local machine.</p>
+                    <p>The AI model is optimized for performance and runs efficiently on modern hardware, providing quick responses without requiring cloud connectivity.</p>
+                </div>
+                <span class="expand-indicator">▼</span>
             </div>
 
-            <div class="card feature-privacy">
+            <div class="card feature-privacy" onclick="toggleCard(this)">
                 <div class="icon">🛡️</div>
                 <h2>Privacy First</h2>
                 <p>Swiss philosophy; <span class="accent-text">Zero telemetry</span>. Because your computer is your computer: By default, your data never leaves your local storage, and no will scrutinize it. You are the sole owner.</p>
+                <div class="card-expandable">
+                    <h3>Additional Details</h3>
+                    <p>We believe in transparency and user control. LuminOS includes no tracking, no analytics, and no hidden data collection. Your files, your conversations with Lumin, and your usage patterns stay completely private.</p>
+                    <p>Built with privacy-focused tools and open-source components that you can audit yourself.</p>
+                </div>
+                <span class="expand-indicator">▼</span>
             </div>
 
-            <div class="card feature-tech">
+            <div class="card feature-tech" onclick="toggleCard(this)">
                 <div class="icon">⚡</div>
                 <h2>Debian Core</h2>
                 <p>Built on the rock-solid foundation of <span class="accent-text">Debian 13 "Trixie"</span>. Stability meets modern software compatibility.</p>
+                <div class="card-expandable">
+                    <h3>Additional Details</h3>
+                    <p>Debian provides a stable, secure, and well-tested foundation. With thousands of packages available and excellent hardware support, you get the reliability of enterprise Linux with the flexibility of a modern desktop system.</p>
+                    <p>Regular security updates and long-term support ensure your system stays secure and functional.</p>
+                </div>
+                <span class="expand-indicator">▼</span>
             </div>
 
-            <div class="card feature-apps">
+            <div class="card feature-apps" onclick="toggleCard(this)">
                 <div>
                     <h2>"Batteries Included"</h2>
                     <p>Productivity out of the box with <span class="accent-text">OnlyOffice</span>, <span class="accent-text">VLC</span>, <span class="accent-text">Timeshift</span>, and full <span class="accent-text">Flatpak</span> support.</p>
+                    <div class="card-expandable">
+                        <h3>Additional Details</h3>
+                        <p>Pre-installed applications include a full office suite, media player, system backup tool, and access to thousands of Flatpak applications. Everything you need to be productive from day one.</p>
+                        <p>Easy software management with graphical tools and command-line options for power users.</p>
+                    </div>
                 </div>
                 <div class="icon">📦</div>
+                <span class="expand-indicator">▼</span>
             </div>
 
-            <div class="card feature-info">
+            <div class="card feature-info" onclick="toggleCard(this)">
                 <div class="icon">⚙️</div>
                 <h2>Tech & Requirements</h2>
                 <p>We will give more technical information on <span class="accent-text">LuminOS</span> very soon! Thank you.</p>
@@ -501,14 +552,24 @@
                 <span class="accent-text">GPU/Graphics:</span> NVIDIA/AMD Dedicated GPU (Accelerates Lumin's response time); integrated graphics will also work.
             </li>
         </ul>
+        <div class="card-expandable">
+            <h3>Recommended Specifications</h3>
+            <ul>
+                <li><span class="accent-text">Processor:</span> 8+ Cores for optimal AI performance</li>
+                <li><span class="accent-text">RAM:</span> 16 GB+ for smoother multitasking</li>
+                <li><span class="accent-text">Storage:</span> 128GB+ NVMe SSD for best experience</li>
+                <li><span class="accent-text">GPU:</span> Dedicated GPU with 4GB+ VRAM for fastest AI responses</li>
+            </ul>
+        </div>
+        <span class="expand-indicator">▼</span>
     </div>
 
-            <div class="card text-card">
+            <div class="card text-card" onclick="toggleCard(this)">
                 <div class="icon">⚖️</div>
                 <h2>Compare & Choose</h2>
                 <p>Side-by-side comparison to help you make the right decision.</p>
                 
-                <div class="comparison-container">
+                <div class="comparison-container" role="region" aria-label="Comparison between Option A and Option B">
                     <div class="comparison-side">
                         <h3>Option A</h3>
                         <ul class="comparison-list">
@@ -531,6 +592,12 @@
                         </ul>
                     </div>
                 </div>
+                <div class="card-expandable">
+                    <h3>More Comparison Details</h3>
+                    <p>You can customize this comparison card to show any two options side by side. Perfect for comparing LuminOS features, comparing with other operating systems, or showcasing different configuration options.</p>
+                    <p>Simply edit the HTML to add your specific comparison points, and the styling will handle the rest.</p>
+                </div>
+                <span class="expand-indicator">▼</span>
             </div>
 
         </div>
@@ -564,6 +631,12 @@
         <p>Designed by Gabriel</p>
         </div>
     </footer>
+
+    <script>
+        function toggleCard(card) {
+            card.classList.toggle('expanded');
+        }
+    </script>
 
 </body>
 </html>
