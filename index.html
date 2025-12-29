@@ -189,13 +189,13 @@
         .card-expandable {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s ease-out, opacity 0.3s ease-out, margin-top 0.3s ease-out;
+            transition: max-height 0.4s ease-out, opacity 0.3s ease-out, margin-top 0.3s ease-out;
             opacity: 0;
             margin-top: 0;
         }
         
         .card.expanded .card-expandable {
-            max-height: 1000px;
+            max-height: 800px;
             opacity: 1;
             margin-top: 20px;
         }
@@ -635,7 +635,25 @@
     <script>
         function toggleCard(card) {
             card.classList.toggle('expanded');
+            const isExpanded = card.classList.contains('expanded');
+            card.setAttribute('aria-expanded', isExpanded);
         }
+        
+        // Add keyboard support
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card[onclick]');
+            cards.forEach(card => {
+                card.setAttribute('tabindex', '0');
+                card.setAttribute('role', 'button');
+                card.setAttribute('aria-expanded', 'false');
+                card.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleCard(this);
+                    }
+                });
+            });
+        });
     </script>
 
 </body>
