@@ -636,7 +636,7 @@
         function toggleCard(card) {
             card.classList.toggle('expanded');
             const isExpanded = card.classList.contains('expanded');
-            card.setAttribute('aria-expanded', isExpanded);
+            card.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
         }
         
         // Add keyboard support
