@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#0a0e1a">
     <title>LuminOS - Intelligence. Privacy. Freedom.</title>
     <meta name="description" content="Your lightweight, private, and AI-integrated Linux distribution.">
     <style>
@@ -302,6 +304,7 @@
         .feature-tech .icon { animation-delay: 1s; filter: drop-shadow(0 0 20px rgba(255, 215, 61, 0.6)); }
         .feature-apps .icon { animation-delay: 1.5s; filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.4)); }
         .feature-info .icon { animation-delay: 2s; filter: drop-shadow(0 0 20px rgba(255, 100, 150, 0.4)); }
+        .text-card .icon { animation-delay: 0.7s; filter: drop-shadow(0 0 18px rgba(0, 217, 255, 0.45)); }
         
         /* --- FOOTER --- */
         footer {
@@ -353,6 +356,58 @@
             animation-delay: 0.7s;
             min-height: 200px;
         }
+        
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .comparison-side {
+            padding: 20px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        
+        .comparison-side h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+        
+        .comparison-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .comparison-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.6;
+            color: var(--text-muted);
+        }
+        
+        .comparison-list li.pro::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #00d9ff;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .comparison-list li.con::before {
+            content: '✗';
+            position: absolute;
+            left: 0;
+            color: #ff6b9d;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
@@ -366,6 +421,7 @@
             .footer-links { gap: 15px; }
             .social-link { font-size: 0.85rem; padding: 8px 12px; }
             footer { padding: 30px 15px; }
+            .comparison-container { grid-template-columns: 1fr; gap: 20px; }
         }
         
         .accent-text { color: var(--accent-primary); font-weight: 700; }
@@ -448,10 +504,33 @@
     </div>
 
             <div class="card text-card">
-                <div class="icon">📝</div>
-                <h2>Add Your Text Here</h2>
-                <p>This is a placeholder card where you can add your custom text content. Edit this section to include any additional information, announcements, or content you'd like to display on your website.</p>
-                <p>You can modify this text directly in the HTML file. Simply locate this card section and replace the content with your desired message.</p>
+                <div class="icon">⚖️</div>
+                <h2>Compare & Choose</h2>
+                <p>Side-by-side comparison to help you make the right decision.</p>
+                
+                <div class="comparison-container">
+                    <div class="comparison-side">
+                        <h3>Option A</h3>
+                        <ul class="comparison-list">
+                            <li class="pro">First advantage point</li>
+                            <li class="pro">Second advantage point</li>
+                            <li class="pro">Third advantage point</li>
+                            <li class="con">First drawback point</li>
+                            <li class="con">Second drawback point</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="comparison-side">
+                        <h3>Option B</h3>
+                        <ul class="comparison-list">
+                            <li class="pro">First advantage point</li>
+                            <li class="pro">Second advantage point</li>
+                            <li class="pro">Third advantage point</li>
+                            <li class="con">First drawback point</li>
+                            <li class="con">Second drawback point</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
         </div>
