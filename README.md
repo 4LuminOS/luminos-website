@@ -1,4 +1,4 @@
-# LuminOS Website 🌐
+# LuminOS Website (beta) 🌐
 
 This repository contains the source code for the official **LuminOS** home page
 
@@ -13,11 +13,7 @@ Visit the website here: **https://4luminos.github.io/luminos-website**
 This is a lightweight, responsive showcase website built with:
 * **HTML5**
 * **CSS3** (Modern Bento Grid kind of design)
-and...
-* **No external frameworks** (Pure & Fast)
+* **No external frameworks** (Clean & Fast)
 
 ## 📄 License
-
-This website is (oubviously) open-source and licensed under the **GNU GPLv3**
-
-🙂
+Licensed under the **GNU GPLv3** 🙂
